@@ -53,5 +53,21 @@ class MainActivity : AppCompatActivity() {
                             if (num1 == null || num2 == null) "Please enter a number"
                             else "The Result is ${num1 + num2}"
         }
+
+
+        // aumentar en 1 el valor de un número y disminuir en 1 el valor de un número
+        val btn_add: Button = findViewById(R.id.btn_add)
+        val btn_subtract: Button = findViewById(R.id.btn_rest)
+
+        btn_add.setOnClickListener {
+            var age = myNumber.text.toString().toIntOrNull()
+
+            if (age == null) textResult.text = "Please enter a number"
+            else myNumber.setText((++age).toString())
+        }
+        btn_subtract.setOnClickListener {
+            val age = myNumber.text.toString().toIntOrNull()
+            myNumber.setText("${age?.minus(1)}")
+        }
     }
 }
