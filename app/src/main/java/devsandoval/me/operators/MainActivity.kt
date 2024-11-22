@@ -73,9 +73,12 @@ class MainActivity : AppCompatActivity() {
     }
     private fun verifyAge(age: Int?, textResult: TextView){
         val message = when{
-            age == null -> "Please enter a number"
-            age < 18 -> "You are a minor"
-            age > 18 -> "You are an adult"
+            !(age != null) -> "Please enter a number"
+            age <= 0 || age > 110 -> "Enter a valid age"
+            age  < 18 || age > 80 -> "You are a minor or an old person"
+//            age < 18 -> "You are a minor"
+//            age > 18 && age <= 30 -> "You are an young adult"
+//            age >30 -> "You are an adult"
             else -> "You are 18 years old"
         }
         textResult.text = message
