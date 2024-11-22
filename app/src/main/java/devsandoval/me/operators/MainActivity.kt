@@ -34,11 +34,7 @@ class MainActivity : AppCompatActivity() {
                 textResult.text = "You are an adult"
             else
                 textResult.text = "You are 18 years old"*/
-            textResult.text =
-                            if (result == null) "Please enter a number"
-                            else if(result < 18) "You are a minor"
-                            else if (result > 18) "You are an adult"
-                            else "You are 18 years old"
+            verifyAge(result, textResult)
         }
         //Sum of two numbers:
         val textNum1:EditText = findViewById(R.id.editTextText4)
@@ -54,20 +50,34 @@ class MainActivity : AppCompatActivity() {
                             else "The Result is ${num1 + num2}"
         }
 
-
         // aumentar en 1 el valor de un número y disminuir en 1 el valor de un número
         val btn_add: Button = findViewById(R.id.btn_add)
         val btn_subtract: Button = findViewById(R.id.btn_rest)
 
         btn_add.setOnClickListener {
             var age = myNumber.text.toString().toIntOrNull()
-
             if (age == null) textResult.text = "Please enter a number"
-            else myNumber.setText((++age).toString())
+            else {
+                myNumber.setText((++age).toString())
+                verifyAge(age, textResult)
+            }
         }
         btn_subtract.setOnClickListener {
-            val age = myNumber.text.toString().toIntOrNull()
-            myNumber.setText("${age?.minus(1)}")
+            var age = myNumber.text.toString().toIntOrNull()
+            if(age == null) textResult.text = "Please enter a number"
+            else {
+                myNumber.setText((--age).toString())
+                verifyAge(age, textResult)
+            }
         }
+    }
+    private fun verifyAge(age: Int?, textResult: TextView){
+        val message = when{
+            age == null -> "Please enter a number"
+            age < 18 -> "You are a minor"
+            age > 18 -> "You are an adult"
+            else -> "You are 18 years old"
+        }
+        textResult.text = message
     }
 }
